@@ -8,7 +8,9 @@
 	const links = [
 		['/about', '소개'],
 		['/hello/kit', '인사'],
-		['/posts', '게시판']
+		['/posts', '게시판'],
+		['/load-demo', 'load'],
+		['/external', '외부 API']
 	];
 </script>
 
