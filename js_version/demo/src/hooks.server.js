@@ -14,3 +14,8 @@ export async function handle({ event, resolve }) {
 	}
 	return resolve(event);
 }
+
+export function handleError({ error, event, kind }) {
+	console.error('[handleError]', kind, event.url.pathname);
+	if (kind === 'unknown') console.error(error);
+}

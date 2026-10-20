@@ -1,12 +1,10 @@
 import { dev } from '$app/env';
+import { JWT_SECRET } from '$app/env/private';
 import type { Cookies } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 import type { PublicUser } from './users.js';
 
 export const SESSION_COOKIE = 'session_token';
-
-/** study9에서 `$app/env/private`의 `JWT_SECRET`으로 바꿉니다. */
-const SECRET = 'dev-only-change-me';
 
 type TokenPayload = {
 	sub: string;
@@ -15,7 +13,7 @@ type TokenPayload = {
 };
 
 export function signToken(user: PublicUser) {
-	return jwt.sign({ sub: user.id, name: user.name, email: user.email }, SECRET, {
+	return jwt.sign({ sub: user.id, name: user.name, email: user.email }, JWT_SECRET, {
 		expiresIn: '7d'
 	});
 }
@@ -24,7 +22,7 @@ export function readSession(cookies: Cookies): PublicUser | null {
 	const token = cookies.get(SESSION_COOKIE);
 	if (!token) return null;
 	try {
-		const payload = jwt.verify(token, SECRET);
+		const payload = jwt.verify(token, JWT_SECRET);
 		if (typeof payload === 'string') return null;
 		const { sub, name, email } = payload as TokenPayload;
 		if (!sub || !name || !email) return null;

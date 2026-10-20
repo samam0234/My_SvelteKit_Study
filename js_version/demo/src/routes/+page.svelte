@@ -14,6 +14,10 @@
 <div class="mt-8 border border-line bg-card p-4">
 	<Counter />
 </div>
+<img class="mt-8 size-16" src="/mark.svg" alt="" />
+<p class="mt-2 text-sm text-stone-600">
+	<code>static/mark.svg</code>는 주소 <code>/mark.svg</code>로 그대로 제공됩니다.
+</p>
 <p class="mt-4 text-sm text-stone-600">
 	푸터의 경로는 <code>$app/state</code>의 <code>page.url</code>입니다. 클릭만으로 바뀌고 서버 데이터는
 	아닙니다.

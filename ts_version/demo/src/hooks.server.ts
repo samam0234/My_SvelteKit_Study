@@ -1,4 +1,4 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect, type Handle, type HandleServerError } from '@sveltejs/kit';
 import { readSession } from '#lib/server/auth.js';
 
 function needsLogin(pathname: string) {
@@ -13,4 +13,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 		redirect(303, `/login?next=${encodeURIComponent(next)}`);
 	}
 	return resolve(event);
+};
+
+export const handleError: HandleServerError = ({ error, event, kind }) => {
+	console.error('[handleError]', kind, event.url.pathname);
+	if (kind === 'unknown') console.error(error);
 };
