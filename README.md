@@ -21,7 +21,7 @@ npm -v    # 11.x 확인
 
 ### demo/ (study1 ~ study10)
 
-- SvelteKit 2 + Svelte 5
+- SvelteKit 3 + Svelte 5
 - 파일 기반 라우팅 (`src/routes`, `+page` / `+layout`)
 - `load` (서버 / 유니버설) + form actions
 - `+server` API
@@ -76,7 +76,7 @@ npm run dev          # http://localhost:5173
 | [study6.md](study6.md) | 고급 1 — JWT 쿠키 인증 | 회원가입/로그인, HttpOnly 쿠키, 작성자 |
 | [study7.md](study7.md) | 고급 2 — hooks | `handle`, `locals.user`, 보호 라우트 |
 | [study8.md](study8.md) | 고급 3 — 서버/클라이언트 경계 | `$state`, `$lib/server`, `$app/state` |
-| [study9.md](study9.md) | 고급 4 — 에러·환경 변수·메타 | `+error`, `$env`, `<svelte:head>` |
+| [study9.md](study9.md) | 고급 4 — 에러·환경 변수·메타 | `+error`, `defineEnvVars`, `<svelte:head>` |
 | [study10.md](study10.md) | 고급 5 — 빌드와 배포 | adapter-node, Docker, preview |
 | [studyFinal.md](studyFinal.md) | 종합 프로젝트 (구조 다르게) | 학습 카드 웹사이트, feature + SQLite |
 
