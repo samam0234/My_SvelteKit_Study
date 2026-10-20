@@ -7,11 +7,7 @@
 
 <h1 class="text-3xl font-semibold tracking-tight">새 글</h1>
 <p class="mt-2 text-sm text-stone-600">
-	{#if data.user}
-		{data.user.name} 이름으로 등록됩니다.
-	{:else}
-		로그인하지 않으면 작성자는 손님입니다.
-	{/if}
+	{data.user?.name} 이름으로 등록됩니다. 이 주소는 로그인하지 않으면 열리지 않습니다.
 </p>
 <form class="mt-6 border border-line bg-card p-4" method="POST" use:enhance>
 	<PostFields

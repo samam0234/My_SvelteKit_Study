@@ -13,7 +13,8 @@
 		['/posts', '게시판'],
 		['/load-demo', 'load'],
 		['/external', '외부 API'],
-		['/guestbook', '방명록']
+		['/guestbook', '방명록'],
+		['/secret', '비밀']
 	] as const;
 </script>
 

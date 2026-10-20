@@ -1,4 +1,4 @@
-import { deletePost, getPost, updatePost } from '#lib/server/posts.js';
+import { canEdit, deletePost, getPost, updatePost } from '#lib/server/posts.js';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = ({ params }) => {
@@ -7,7 +7,13 @@ export const GET: RequestHandler = ({ params }) => {
 	return Response.json(post);
 };
 
-export const PATCH: RequestHandler = async ({ params, request }) => {
+export const PATCH: RequestHandler = async ({ params, request, locals }) => {
+	if (!locals.user) return Response.json({ message: '로그인이 필요합니다.' }, { status: 401 });
+	const current = getPost(params.id);
+	if (!current) return Response.json({ message: '글을 찾을 수 없습니다.' }, { status: 404 });
+	if (!canEdit(current, locals.user)) {
+		return Response.json({ message: '이 글을 수정할 수 없습니다.' }, { status: 403 });
+	}
 	const body = await request.json().catch(() => null);
 	const title = String(body?.title ?? '').trim();
 	const text = String(body?.body ?? '').trim();
@@ -19,7 +25,13 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 	return Response.json(post);
 };
 
-export const DELETE: RequestHandler = ({ params }) => {
+export const DELETE: RequestHandler = ({ params, locals }) => {
+	if (!locals.user) return Response.json({ message: '로그인이 필요합니다.' }, { status: 401 });
+	const current = getPost(params.id);
+	if (!current) return Response.json({ message: '글을 찾을 수 없습니다.' }, { status: 404 });
+	if (!canEdit(current, locals.user)) {
+		return Response.json({ message: '이 글을 지울 수 없습니다.' }, { status: 403 });
+	}
 	if (!deletePost(params.id)) {
 		return Response.json({ message: '글을 찾을 수 없습니다.' }, { status: 404 });
 	}

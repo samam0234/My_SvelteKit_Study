@@ -77,6 +77,13 @@ export function updatePost(id: string, input: { title: string; body: string }) {
 	return post;
 }
 
+/** 안내 글(authorId가 없음)은 로그인한 사람이면 고칠 수 있습니다. */
+export function canEdit(post: Post, user: { id: string } | null) {
+	if (!user) return false;
+	if (post.authorId === null) return true;
+	return post.authorId === user.id;
+}
+
 export function deletePost(id: string) {
 	const posts = read();
 	const next = posts.filter((post) => post.id !== id);
