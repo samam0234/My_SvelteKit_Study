@@ -10,7 +10,8 @@
 		['/hello/kit', '인사'],
 		['/posts', '게시판'],
 		['/load-demo', 'load'],
-		['/external', '외부 API']
+		['/external', '외부 API'],
+		['/guestbook', '방명록']
 	];
 </script>
 

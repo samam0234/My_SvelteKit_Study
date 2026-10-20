@@ -17,6 +17,8 @@
 **/*.sqlite
 **/*.sqlite3
 **/*.db
+**/data/*.json
+!**/data/.gitkeep
 
 # logs
 **/npm-debug.log*
