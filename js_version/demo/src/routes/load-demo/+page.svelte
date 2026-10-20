@@ -14,6 +14,10 @@
 		<dd>{data.secretNote}</dd>
 	</div>
 	<div>
+		<dt class="text-stone-500">serverOnlySentence (#lib/server/vault)</dt>
+		<dd>{data.serverOnlySentence}</dd>
+	</div>
+	<div>
 		<dt class="text-stone-500">ranOn (+page.js, 유니버설)</dt>
 		<dd class="font-mono">{data.ranOn}</dd>
 	</div>
