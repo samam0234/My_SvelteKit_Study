@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@theme {
+	--font-sans:
+		'Iowan Old Style', 'Palatino Linotype', Palatino, 'Apple SD Gothic Neo', 'Malgun Gothic', serif;
+	--color-ink: #1c1410;
+	--color-paper: #f3eee4;
+	--color-card: #fffaf3;
+	--color-line: #e4d8c8;
+	--color-ember: #ff3e00;
+	--color-pine: #1d4a38;
+}
