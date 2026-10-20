@@ -1,11 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	import { enhance } from '$app/forms';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 </script>
 
-<p class="text-sm text-stone-600">id = {page.params.id}</p>
-<h1 class="mt-2 text-3xl font-semibold tracking-tight">글 {page.params.id}</h1>
-<p class="mt-4 leading-7">
-	아직 파일에서 글을 읽지 않습니다. <code>[id]</code>가 URL에서 넘어오는지만 확인합니다.
-	<code>/posts/1</code>과 <code>/posts/2</code>를 오가면 숫자만 바뀌고, 위 레이아웃 문구는 유지됩니다.
-</p>
-<p class="mt-6"><a class="text-sm underline" href="/posts">목록</a></p>
+<p class="text-xs text-stone-500">{data.post.authorName}</p>
+<h1 class="mt-2 text-3xl font-semibold tracking-tight">{data.post.title}</h1>
+<p class="mt-4 whitespace-pre-wrap leading-7">{data.post.body}</p>
+<div class="mt-6 flex gap-4 text-sm">
+	<a class="underline" href="/posts/{data.post.id}/edit">수정</a>
+	<form method="POST" action="?/remove" use:enhance>
+		<button class="underline">삭제</button>
+	</form>
+	<a class="underline" href="/posts">목록</a>
+</div>
