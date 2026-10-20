@@ -1,0 +1,35 @@
+# dependencies
+**/node_modules/
+
+# sveltekit
+**/.svelte-kit/
+**/build/
+**/dist/
+**/.vercel/
+**/.output/
+
+# env
+**/.env
+**/.env.*
+!**/.env.example
+
+# db / local data dumps
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+
+# logs
+**/npm-debug.log*
+**/*.log
+
+# editor
+.vscode/*
+!.vscode/extensions.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# nested git from scaffolding tools
+**/.git
+!**/.gitignore
