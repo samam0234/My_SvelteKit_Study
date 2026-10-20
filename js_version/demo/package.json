@@ -33,5 +33,9 @@
 	"imports": {
 		"#lib": "./src/lib/index.js",
 		"#lib/*": "./src/lib/*"
+	},
+	"dependencies": {
+		"bcryptjs": "^3.0.3",
+		"jsonwebtoken": "^9.0.3"
 	}
 }
