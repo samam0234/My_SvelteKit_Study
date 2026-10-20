@@ -1,0 +1,14 @@
+import { fail, redirect } from '@sveltejs/kit';
+import { createNote } from '#lib/features/notes/server/notes.js';
+
+export const actions = {
+	default: async ({ request, locals }) => {
+		if (!locals.user) redirect(303, '/login?next=/notes/new');
+		const form = await request.formData();
+		const title = String(form.get('title') ?? '').trim();
+		const body = String(form.get('body') ?? '').trim();
+		if (!title || !body) return fail(400, { title, body, missing: true });
+		const note = createNote({ title, body, authorId: locals.user.id });
+		redirect(303, `/notes/${note.id}`);
+	}
+};
