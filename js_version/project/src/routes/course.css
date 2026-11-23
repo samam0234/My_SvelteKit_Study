@@ -1,0 +1,46 @@
+input,
+textarea,
+select {
+	border: 1px solid #718b7e;
+	padding: 0.4rem;
+	border-radius: 0.25rem;
+	max-width: 100%;
+}
+select {
+	min-width: 5rem;
+}
+label {
+	display: block;
+	margin: 0.6rem 0;
+}
+button {
+	border: 1px solid #315b43;
+	padding: 0.4rem 0.7rem;
+	margin: 0.2rem;
+	border-radius: 0.25rem;
+}
+button:disabled {
+	opacity: 0.5;
+}
+h1 {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+h2 {
+	font-size: 1.4rem;
+	margin-top: 1rem;
+}
+nav,
+form,
+ul {
+	margin: 1rem 0;
+}
+a {
+	color: #175c45;
+	text-decoration: underline;
+}
+textarea {
+	min-height: 6rem;
+	display: block;
+	width: 100%;
+}
