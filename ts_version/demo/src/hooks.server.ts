@@ -1,4 +1,5 @@
-import { redirect, type Handle, type HandleServerError } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit/hooks';
 import { readSession } from '#lib/server/auth.js';
 
 function needsLogin(pathname: string) {
