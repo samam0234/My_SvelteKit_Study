@@ -1,7 +1,6 @@
 <script>
-	import { enhance } from '$app/forms';
-
-	let { data, form } = $props();
+import { enhance } from '$app/forms';
+let { data, form } = $props();
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">메모 수정</h1>

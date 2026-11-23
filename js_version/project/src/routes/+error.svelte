@@ -1,5 +1,5 @@
 <script>
-	import { page } from '$app/state';
+import { page } from '$app/state';
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">{page.status}</h1>

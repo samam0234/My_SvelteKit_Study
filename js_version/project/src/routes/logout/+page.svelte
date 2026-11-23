@@ -1,5 +1,5 @@
 <script>
-	import { enhance } from '$app/forms';
+import { enhance } from '$app/forms';
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">로그아웃</h1>

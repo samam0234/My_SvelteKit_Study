@@ -1,7 +1,6 @@
 <script>
-	import { enhance } from '$app/forms';
-
-	let { form } = $props();
+import { enhance } from '$app/forms';
+let { form } = $props();
 </script>
 
 <h1 class="text-3xl font-semibold tracking-tight">가입</h1>

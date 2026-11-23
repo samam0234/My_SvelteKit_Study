@@ -1,7 +1,6 @@
 <script>
-	import { enhance } from '$app/forms';
-
-	let { data } = $props();
+import { enhance } from '$app/forms';
+let { data } = $props();
 </script>
 
 <p class="text-xs text-stone-500">{data.note.authorName}</p>

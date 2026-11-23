@@ -1,5 +1,5 @@
 <script>
-	let { data } = $props();
+let { data } = $props();
 </script>
 
 <div class="flex items-end justify-between gap-4">
