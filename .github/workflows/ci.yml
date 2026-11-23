@@ -1,0 +1,31 @@
+name: course-ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [js_version/demo, ts_version/demo, js_version/project, ts_version/project]
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: ${{ matrix.app }}/package-lock.json
+      - run: npm ci
+      - run: npm run check --if-present
+      - run: npm test --if-present
+      - run: npm run build
+      - if: contains(matrix.app, 'project')
+        run: |
+          ORIGIN=http://127.0.0.1:3000 PORT=3000 AI_MODE=mock npm start > /tmp/pine.log 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:3000/health && break; sleep 1; done
+          BASE_URL=http://127.0.0.1:3000 npm run test:api
+          npx playwright install --with-deps chromium
+          BASE_URL=http://127.0.0.1:3000 npm run test:browser
