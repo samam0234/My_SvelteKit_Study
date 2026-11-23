@@ -1,56 +1,11 @@
-# sv
+# 소나무 게시판 (js_version)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+현재 21단계 학습의 실행 앱. root [README](../../README.md)·[studyMidpoint](../../studyMidpoint.md)·[studyFinal](../../studyFinal.md)을 따른다.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@1.1.1 create --template minimal --no-types --add eslint prettier tailwindcss="plugins:forms" --install npm js_version/project
-```
-
-## Adding features
-
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```powershell
+npm ci
+Copy-Item .env.example .env
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+`/board`에서 새 계정 가입, `/lab` 기초 실습, `/ui` 폼, `/integrations` 외부 연동, `/ai` 문서 AI. 운영은 `npm run build` 후 `npm start`. 정확한 DB·키 설정·검증 범위는 루트 문서를 따른다. `/notes`는 이전 SQLite 메모 예시로 현재 게시판 계정과 분리돼 있다. 기본 DB는 `data/board.sqlite`다. PostgreSQL 등은 DB_KIND·DATABASE_URL로 전환하며 자동 이관은 하지 않는다.

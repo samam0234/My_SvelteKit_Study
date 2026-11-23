@@ -1,95 +1,103 @@
 # SvelteKit 학습 저장소
 
-JS / TS 기반 풀스택 엔진 SvelteKit을 기초 개념부터 단계별로 실습하며 정리하는 개인 학습 저장소입니다.
-같은 워크스페이스의 `full_stack/next.js/`(React 풀스택)와 `full_stack/nuxt.js/`(Vue 풀스택)를 이미 다룬 전제에서, **같은 자리를 Svelte로 채우는 방법**을 배웁니다.
+SvelteKit 한 프레임워크로 환경 설정부터 로그인 게시판·서버 DB·AI·운영까지 학습한다. [노션 원문](https://app.notion.com/p/3fdd7dec5e2e81cea8e6e8daa94a52e2)을 기준으로 기존 study 파일을 새 커리큘럼에 맞게 덮어썼다. 루트 문서는 study0~18·studyMidpoint·studyFinal 총 21개이며 midpoint/final도 study 접두사를 사용한다.
 
-학습 목표는 [Notion: SvelteKit](https://app.notion.com/p/SvelteKit-3fdd7dec5e2e81cea8e6e8daa94a52e2)를 기준으로 합니다.
+## 실행
 
-- `studyN.md` 문서에 개념 정리와 실습 과정, **실제로 실행해서 확인한 결과**를 순서대로 기록합니다.
-- `js_version/` · `ts_version/` 아래에 같은 기능의 프로젝트를 JavaScript와 TypeScript로 각각 둡니다.
-- `demo/`는 각 study에서 다루는 내용을 구현한 SvelteKit 프로젝트입니다. study가 진행될수록 코드도 함께 발전합니다.
-- `project/`는 `studyFinal.md`에 대응하는, `demo/`와는 **다른 구조**로 처음부터 다시 설계한 완결된 미니 웹사이트입니다.
-
-## 사전 준비
+Node 24, npm 11. 각 앱의 package-lock.json이 정확한 설치 버전 기준이다. 현재 과정은 `ts_version/project` 또는 `js_version/project`의 `/board`다. 두 버전은 같은 기능이며 `.agent/sync-course.mjs`로 TS 타입만 제거해 JS를 동기화한다.
 
 ```powershell
-node -v   # v24.x 확인
-npm -v    # 11.x 확인
-```
-
-## 기술 스택
-
-### demo/ (study1 ~ study10)
-
-- SvelteKit 3 + Svelte 5
-- 파일 기반 라우팅 (`src/routes`, `+page` / `+layout`)
-- `load` (서버 / 유니버설) + form actions
-- `+server` API
-- Tailwind CSS
-- JSON 파일 저장소 (게시글·회원·방명록)
-- JWT + HttpOnly 쿠키 인증
-- `hooks.server` 인가
-- `@sveltejs/adapter-node`
-
-### project/ (studyFinal)
-
-- 라우트 그룹 `(marketing)` / `(desk)`
-- `src/lib/features` 폴더
-- `node:sqlite` (demo의 JSON과 다른 저장소)
-- 학습 카드 도메인 (게시판과 다른 화면/URL)
-- form actions + hooks 세션
-
-## 프로젝트 실행
-
-```powershell
-# TypeScript 실습
-cd ts_version/demo
-npm install
-npm run dev          # http://localhost:5173
-
-# JavaScript 실습 (동시에 띄울 때)
-cd js_version/demo
-npm install
-npm run dev -- --port 5174
-```
-
-최종 프로젝트:
-
-```powershell
+node -v
+npm -v
+# 새 프로젝트에만: npx sv create pine
 cd ts_version/project
-npm install
-npm run dev          # http://localhost:5173
+npm ci
+Copy-Item .env.example .env
+npm ls @sveltejs/kit svelte vite
+npm run dev -- --host 127.0.0.1
 ```
 
-시드 계정은 각 프로젝트 README와 `studyFinal.md`에 적혀 있습니다. demo 게시판은 `demo@example.com` / `demo1234` 입니다.
+명령별 설명: 1~2줄은 실행기·패키지 도구 확인, 3줄은 새 폴더 생성 안내, 4줄은 앱 루트 이동, 5줄은 lockfile 설치, 6줄은 로컬 설정 생성, 7줄은 실제 설치 버전 확인, 8줄은 개발 서버 시작이다. 별도 터미널에서 `git status`, `git check-ignore .env`를 실행한다. Git이 없는 새 저장소에서만 `git init`을 하고 `.gitignore`에 node_modules·.svelte-kit·build·.env·DB·업로드·백업을 제외한다.
 
-## 학습 문서 목차
 
-| 문서 | 주제 | 핵심 내용 |
-|---|---|---|
-| [study0.md](study0.md) | SvelteKit 기초 이론 | Svelte + 라우팅 + SSR + API, Next/Nuxt와의 차이, `+page`/`load`/actions/hooks |
-| [study1.md](study1.md) | 만드는 방법 & 명령어, 실습 1 | `sv create`, npm 스크립트, 루트 레이아웃, SSR HTML 확인 |
-| [study2.md](study2.md) | 실습 2 — 파일 기반 라우팅 | `+layout`, 동적 세그먼트, 라우트 그룹, `<a>` |
-| [study3.md](study3.md) | 실습 3 — load | 서버 load, 유니버설 load, 외부 API `fetch` |
-| [study4.md](study4.md) | 실습 4 — form actions | 방명록, `fail`, `use:enhance` |
-| [study5.md](study5.md) | 실습 5 — API와 게시판 | `+server` CRUD, JSON 저장소 |
-| [study6.md](study6.md) | 고급 1 — JWT 쿠키 인증 | 회원가입/로그인, HttpOnly 쿠키, 작성자 |
-| [study7.md](study7.md) | 고급 2 — hooks | `handle`, `locals.user`, 보호 라우트 |
-| [study8.md](study8.md) | 고급 3 — 서버/클라이언트 경계 | `$state`, `$lib/server`, `$app/state` |
-| [study9.md](study9.md) | 고급 4 — 에러·환경 변수·메타 | `+error`, `defineEnvVars`, `<svelte:head>` |
-| [study10.md](study10.md) | 고급 5 — 빌드와 배포 | adapter-node, Docker, preview |
-| [studyFinal.md](studyFinal.md) | 종합 프로젝트 (구조 다르게) | 학습 카드 웹사이트, feature + SQLite |
+브라우저에서 `/board`를 열고 새 계정으로 가입한다(비밀번호 10자 이상). `/lab`은 기초 문법·초안, `/ui`는 UI/폼 라이브러리, `/integrations`는 외부 서비스, `/realtime`은 SSE/WebSocket, `/ai`는 문서 AI, `/api-docs`는 OpenAPI다. WebSocket은 `npm run build` 후 `npm start`로 실행한다. 기존 demo의 `/`·`/posts`·방명록, project의 `/notes`는 이전 학습 기록이며 현재 게시판과 계정·쿠키·DB가 분리돼 있다.
 
-## 저장소 구조
+## 학습 순서
 
+| 문서 | 주제 |
+|---|---|
+| [study0](study0.md) | 환경 설정 |
+| [study1](study1.md) | Hello World와 기본 문법 |
+| [study2](study2.md) | 핵심 구조 |
+| [study3](study3.md) | 데이터 다루기 |
+| [study4](study4.md) | 라우팅과 요청 처리 |
+| [study5](study5.md) | 폼·입력·검증 |
+| [study6](study6.md) | DB·API 연동 |
+| [study7](study7.md) | 인증·보안 기초 |
+| [study8](study8.md) | 구조화·재사용 |
+| [study9](study9.md) | 테스트·디버깅 |
+| [study10](study10.md) | 배포·정리 |
+| [studyMidpoint](studyMidpoint.md) | 중간 응용: 로그인 게시판 |
+| [study11](study11.md) | DB 확장 |
+| [study12](study12.md) | 프론트·UI 연동 |
+| [study13](study13.md) | 외부 서비스 연동 |
+| [study14](study14.md) | API 설계 |
+| [study15](study15.md) | 성능·캐시 |
+| [study16](study16.md) | 운영·CI/CD |
+| [study17](study17.md) | 실시간·확장 |
+| [study18](study18.md) | AI 연동·MCP |
+| [studyFinal](studyFinal.md) | 심화 응용: 소나무 게시판 |
+
+각 문서는 목표 → 이론(용도·개념·비유) → 실기(전체 파일·줄별 설명) → 연동 → 오류 노트 → 연습 2~3개 → 체크리스트 → 다음 단계 순서다. 응용 문서는 기능·폴더·구현 순서·구성도·배포 점검·회고를 포함한다.
+
+## 문서와 코드 연결
+
+| 구간 | 현재 코드 |
+|---|---|
+| study0~3 | `*/project` vite/env, `/lab`, StudyCard·createDraft; 기존 SSR 예시는 `*/demo` |
+| study4~5 | `*/project/src/routes/board`, `[id]`, error, action·schema |
+| study6~8·Midpoint | `*/project/src/lib/server/course`, hooks, `/api/[...path]` |
+| study9~10 | `*/project/tests`, Dockerfile·server.mjs; demo 빌드도 유지 |
+| study11 | storage: SQLite·pg·mysql2·Mongo 어댑터, root compose |
+| study12~14 | ui·integrations·oauth·api-docs, static/openapi.json |
+| study15~17 | cache·jobs·worker·measure·events·realtime·files, workflows·backup |
+| study18·Final | ai·MCP scripts + 전체 게시판·Docker 운영 |
+
+DB 접속 전환은 새 DB 연결을 선택하는 기능이며 기존 SQLite 자료를 자동 이관하지 않는다. 업로드는 UTF-8 txt/md만, 결제는 테스트 키·영수증 저장만 지원한다. worker는 단일 웹 인스턴스 학습용이며 여러 인스턴스의 원자 claim은 별도 구현이 필요하다. AI는 단어 검색 기반 미니 예제이며 PDF 파서·영속 채팅은 포함하지 않는다.
+
+## 검증·운영
+
+```powershell
+# project 앱 루트
+npm test
+npm run build
+# TS: npm run check
+npm start
+# 별도 앱 터미널
+$env:BASE_URL='http://localhost:3000'
+npm run test:api
+npm run measure
+$env:BOARD_ORIGIN='http://localhost:3000'
+npm run mcp:client -- 문서
 ```
-SvelteKit/
-├─ study0.md ~ studyFinal.md
-├─ js_version/
-│  ├─ demo/          ← JS 실습 (study1~study10 누적)
-│  └─ project/       ← studyFinal (다른 구조)
-├─ ts_version/
-│  ├─ demo/          ← TS 실습 (study1~study10 누적)
-│  └─ project/       ← studyFinal (다른 구조)
-└─ .agent/           ← AI 에이전트 공통 가이드라인
-```
+
+상세 실행 결과·미실행 범위는 [docs/verification.md](docs/verification.md), 노션 체크 원문은 [docs/notion-requirements.json](docs/notion-requirements.json)이다. 원문 18개 체크 항목은 각 문서의 ‘📌 노션 원문 추가 항목’에 빈 체크로 그대로 배치했으며 **문서 미배치 없음**이다. Svelte 페이지의 다른 저장소 경로가 들어간 원문은 수정하지 않고 현재 대응 위치를 위 표에 안내했다.
+
+Docker·CI/CD·백업 복구·외부 배포 점검은 [study16](study16.md)을 따른다. 공급자 키·OAuth 앱·실제 호스팅 설정이 없는 기능은 설정 미완료를 오류로 반환한다. GitHub Actions 파일과 실제 Actions 실행·배포 성공은 구분한다.
+
+## 공식 자료와 요구 출처
+
+- [SvelteKit 3 마이그레이션](https://svelte.dev/docs/kit/migrating-to-sveltekit-3)
+- [SvelteKit 어댑터](https://svelte.dev/docs/kit/adapters)
+- [GitHub OAuth](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps)
+- [Stripe 웹훅 운영](https://docs.stripe.com/events/manage-webhook-endpoints)
+- [Ollama chat API](https://docs.ollama.com/api/chat)
+- [MCP SDK v1 서버](https://ts.sdk.modelcontextprotocol.io/server)
+
+
+- [공통 API 스펙 v1](https://app.notion.com/p/3d6d7dec5e2e8139adbfd36dd506c65e)
+- [Svelte 페이지의 이전 체크리스트](https://app.notion.com/p/3fdd7dec5e2e81b89b69c07abd5d2f81)
+- [AI 미니 프로젝트 명단](https://app.notion.com/p/40bd7dec5e2e81dab88fda4b558aa498)
+- [DocuForge 요구](https://app.notion.com/p/40bd7dec5e2e818d9c91c6fb26dccc4c)
+
+문서 원문·줄별 설명 갱신: `python scripts/build-study-docs.py`. 코드 수정 후 JS 동기화→검증→문서 생성→노션 갱신 순서로 작업한다.

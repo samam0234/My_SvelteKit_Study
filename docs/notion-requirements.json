@@ -1,0 +1,25 @@
+{
+  "source": "https://app.notion.com/p/3fdd7dec5e2e81cea8e6e8daa94a52e2",
+  "sveltekit": [
+    "- [x] SvelteKit 프로젝트 생성",
+    "- [x] 파일 기반 라우팅 (<code>src/routes</code>)",
+    "- [x] <code>+page.svelte</code> / <code>+layout.svelte</code> / <code>+page.server.js</code>",
+    "- [x] load 함수로 데이터 패칭",
+    "- [x] form actions / API 라우트",
+    "- [x] 인증 쿠키 / hooks",
+    "- [x] 게시판을 SvelteKit 단일로 구현",
+    "- [ ] 대표 조합 4번(SvelteKit 단일 + PostgreSQL): 메모 사이트 대신 게시판으로 만들어 스펙 v1의 <code>+server.js</code> API 제공",
+    "- [ ] SQLite를 [PostgreSQL](https://app.notion.com/p/3d6d7dec5e2e81d0b8e4ed4c09533df6)로 교체",
+    "- [ ] 위 Svelte 페이지의 SvelteKit 이전 체크리스트와 이 목록을 하나로 합치기"
+  ],
+  "transition": [
+    "- [x] <code>npx sv create</code>로 SvelteKit 프로젝트 만들기 (→ study0, <code>SvelteKit_final</code>)",
+    "- [x] 파일 기반 라우팅: <code>src/routes/posts/[id]/+page.svelte</code> (→ study4, 이 저장소는 users 대신 posts)",
+    "- [x] <code>load()</code>로 데이터 불러오기 (SSR로 첫 응답에 내용이 들어 있는지 확인) (→ study4, <code>curl</code>과 E2E로 확인)",
+    "- [x] form actions + <code>use:enhance</code>로 글쓰기 구현 (서버에서 검증) (→ study5, zod 서버 검증 + JS 없이도 동작 확인)",
+    "- [x] hooks / <code>+layout.server.js</code>로 로그인 세션 검사 (→ study7, httpOnly 쿠키 세션)",
+    "- [x] 미니 게시판을 SvelteKit으로 이전 (localStorage 가짜 API → <code>+server.js</code>) (→ studyFinal, PostgreSQL)",
+    "- [ ] adapter를 골라 배포 (→ study10, study17) — adapter-node 선택·Docker 이미지·로컬 컨테이너 확인까지 완료, <b>외부 배포는 아직</b>",
+    "- [x] 도전: 댓글, 내 글만 보기, 페이지 크기 선택 (<code>studyFinal.md</code> 기능 확장, 모두 구현·E2E 확인)"
+  ]
+}
