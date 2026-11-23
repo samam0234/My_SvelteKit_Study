@@ -3,5 +3,5 @@ node_modules
 build
 data
 .env
-.git
-npm-debug.log
+.env.*
+!.env.example
