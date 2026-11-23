@@ -1,5 +1,17 @@
 # 에이전트 공통 가이드라인 (인수인계 문서)
 
+## 현재 커리큘럼 (2026-11-23 갱신)
+
+- 사용자의 새 지시에 따라 SvelteKit 하나만 다룬다. 다른 프레임워크 비교·통합을 추가하지 않는다.
+- 루트 문서는 study0~18, studyMidpoint, studyFinal 총 21개다. 기존 study 파일은 새 번호 주제로 덮어썼다.
+- 현재 실행 앱은 `js_version/project`·`ts_version/project`의 `/board`다. 이전 demo·`/notes`는 보존한 학습 기록이며 현재 게시판과 별도 계정이다.
+- 기본 DB는 SQLite, 운영 예시는 PostgreSQL이다. MariaDB·MongoDB 어댑터도 동일 API 계약을 제공한다. 접속 전환이 기존 데이터 이관을 의미하지 않는다.
+- TS 원본 변경 후 `.agent/sync-course.mjs`로 JS를 동기화한다. 아래의 예전 커리큘럼 설명은 과거 기록으로 읽는다.
+- 문서 갱신은 `python scripts/build-study-docs.py`, 구조·노션 체크 원문 검사는 `python scripts/verify-docs.py`를 사용한다.
+- 실제 검증 범위·미실행 항목은 `docs/verification.md`를 따른다. 외부 키·실배포·실모델을 mock·구성 파일만으로 완료 표시하지 않는다.
+- 노션은 코드·문서·검증 뒤 갱신한다. 커밋은 `.agent/COMMIT_GUIDE.md`의 번호별 분리를 유지한다.
+- SvelteKit 3.4에서 hooks 타입은 `@sveltejs/kit/hooks`, env 선언은 `@sveltejs/kit/env`다.
+
 이 문서는 이 저장소에서 작업하는 모든 AI 에이전트(Claude, Grok, Codex 등)가 **공통으로** 지켜야 할 규칙을 정리한 인수인계 문서입니다.
 `.claude/`, `.grok/`, `.codex/` 폴더의 에이전트별 문서는 이 문서를 기본으로 삼고, 도구별 특이사항만 추가로 기술합니다.
 

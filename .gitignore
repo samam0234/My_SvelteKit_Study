@@ -17,6 +17,11 @@
 **/*.sqlite
 **/*.sqlite3
 **/*.db
+**/*.sqlite-wal
+**/*.sqlite-shm
+**/data/uploads/
+backups/
+*.dump
 **/data/*.json
 !**/data/.gitkeep
 
