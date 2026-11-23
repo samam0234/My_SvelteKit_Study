@@ -18,6 +18,7 @@
 | 백업 복구 | 별도 DB 복원 성공 | pg_dump custom format → docker cp → pine_restore_course DB에 pg_restore, 당시 게시글 4개 확인 |
 | npm audit | 알려진 취약점 0 | project 설치·audit 및 demo 패치 후 검사. Kit 3.4·adapter-node 6.0.5 등 lockfile 기준 |
 | 정적 분석 | 새 TS 기능 파일 ESLint 통과 | server/course·schema·새 route·hooks·env. 이전 전체 앱의 lint 통과를 주장하지 않음 |
+| GitHub Actions | 네 matrix job 모두 success | [course-ci 첫 원격 실행](https://github.com/samam0234/My_SvelteKit_Study/actions/runs/45176121604), 코드 커밋 f278814에서 JS·TS demo/project 설치·검사·테스트·빌드와 project API·브라우저 검사 통과 |
 
 브라우저 검사는 카운터·localStorage 복원·가입·로그인·글 등록·XSS 텍스트 이스케이프·댓글·수정·Bits Dialog 열기/Esc·Superforms 저장·AI mock·SSE·WebSocket·API 문서·390px 화면 폭·JS 없는 form action을 포함한다. 병렬 조건을 하나의 테스트 항목으로 묶은 곳이 있어 개별 기능 수와 스크립트 checks 값은 다를 수 있다.
 
@@ -55,7 +56,7 @@ DB별로 별도 서버를 시작하고 BASE_URL을 바꿨다. SQLite는 TS 5183,
 - Stripe 실제 테스트 Checkout·서명 이벤트 실전송, Resend 실메일, GitHub OAuth 실제 승인은 계정·키·발신 도메인 설정 후 별도 검증한다. 실금전 결제는 코드에서 허용하지 않는다.
 - 실제 Ollama 모델 생성·답변 품질 평가는 미실행이다. mock 스트림과 주입한 fetch로 계약·취소 코드 경계를 확인했다.
 - MCP 호스트 등록은 미실행이며 저장소의 SDK 클라이언트로 프로토콜 왕복만 확인했다.
-- GitHub Actions의 실제 run·GHCR push·외부 HTTPS 배포·실제 도메인 연결은 미실행이다. workflow와 체크리스트를 제공했다.
+- 원격 CI는 push 후 네 job 모두 통과했다. 배포 workflow·GHCR push·외부 HTTPS 배포·실제 도메인 연결은 미실행이다.
 - DB 연결 전환을 검증했으며 기존 SQLite 사용자 자료의 자동 이관은 구현하지 않았다. 이관은 백업·키 보존·관계 대조·원복을 포함하는 별도 절차다.
 - 전체 rows를 읽는 학습용 storage의 대량 쿼리 pushdown·인덱스 튜닝, 다중 인스턴스 worker의 원자적 claim, MongoDB 다중 문서 transaction은 운영 규모에 맞게 추가한다.
 - PDF·DOCX 파싱·영속 채팅은 DocuForge 요구를 참고하는 이 미니 예제의 범위 밖이다.
