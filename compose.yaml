@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: pine
+      POSTGRES_USER: pine
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+    ports: ["127.0.0.1:55432:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pine -d pine"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  web:
+    build: ./ts_version/project
+    environment:
+      DB_KIND: postgres
+      DATABASE_URL: postgresql://pine:${DB_PASSWORD}@db:5432/pine
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      ORIGIN: ${ORIGIN:-http://localhost:3000}
+      PUBLIC_ORIGIN: ${ORIGIN:-http://localhost:3000}
+      CORS_ORIGIN: ${ORIGIN:-http://localhost:3000}
+    ports: ["127.0.0.1:3000:3000"]
+    volumes: ["uploads:/app/data"]
+    depends_on:
+      db: { condition: service_healthy }
+  mariadb:
+    image: mariadb:11
+    profiles: ["database-lab"]
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_DATABASE: pine
+      MARIADB_USER: pine
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    ports: ["127.0.0.1:53306:3306"]
+  mongodb:
+    image: mongo:7
+    profiles: ["database-lab"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: pine
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports: ["127.0.0.1:57017:27017"]
+volumes:
+  postgres-data:
+  uploads:
